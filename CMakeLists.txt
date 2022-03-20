@@ -9,6 +9,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
+if(WIN32)
+	add_definitions(-DGAME_WINDOWS)
+elseif(APPLE)
+	add_definitions(-DGAME_MACOS)
+elseif(UNIX)
+	add_definitions(-DGAME_LINUX)
+endif()
+
+
 add_subdirectory(Spring22)
 add_subdirectory(Game)
 add_subdirectory(glfw)

@@ -1,11 +1,12 @@
 #pragma once
 
 #include "WindowImplementation.h"
+#include "GameUtil.h"
 
 namespace Game {
 
 
-	class GameWindow
+	class GAME_API GameWindow
 	{
 		// Singleton 
 
