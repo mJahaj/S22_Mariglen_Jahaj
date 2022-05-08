@@ -2,7 +2,9 @@
 
 
 #include "WindowImplementation.h"
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
+
 namespace Game
 {
 	class GlfwWindow : public WindowImplementation
@@ -16,6 +18,6 @@ namespace Game
 		virtual int GetHeight() const override;
 		~GlfwWindow();
 	private:
-		GLFWwindow* mGlfwWindow;
+		GLFWwindow* mGlfwWindow{ nullptr };
 	};
 }

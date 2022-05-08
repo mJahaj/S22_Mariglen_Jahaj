@@ -122,12 +122,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GAME_LIB;GAME_WINDOWS;GAME_DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GAME_LIB;GAME_OPENGL;GAME_WINDOWS;GAME_DEBUG</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Game;$(SolutionDir)glfw\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Game;$(SolutionDir)glad\include;$(SolutionDir)glfw\include;$(SolutionDir)stbi</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,12 +140,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GAME_LIB;GAME_WINDOWS;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GAME_LIB;GAME_OPENGL;GAME_WINDOWS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Game;$(SolutionDir)glfw\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Game;$(SolutionDir)glad\include;$(SolutionDir)glfw\include;$(SolutionDir)stbi</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,7 +160,16 @@
     <ClInclude Include="GameUtil.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RendererImplementation.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderImplementation.h" />
     <ClInclude Include="specificGLFW\GlfwWindow.h" />
+    <ClInclude Include="specificOpenGL\OpenGLRenderer.h" />
+    <ClInclude Include="specificOpenGL\OpenGLShader.h" />
+    <ClInclude Include="specificOpenGL\OpenGLSprite.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteImplementation.h" />
     <ClInclude Include="WindowImplementation.h" />
   </ItemGroup>
   <ItemGroup>
@@ -172,11 +181,23 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="specificGLFW\GlfwWindow.cpp" />
+    <ClCompile Include="specificOpenGL\OpenGLRenderer.cpp" />
+    <ClCompile Include="specificOpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="specificOpenGL\OpenGLSprite.cpp" />
+    <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\glad\glad.vcxproj">
+      <Project>{e5c2eaac-9eeb-4059-8880-8582bf15feb4}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\glfw\build\src\glfw.vcxproj">
       <Project>{319beed9-efe9-3f29-9e56-8be6b0b8d717}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\stbi\stbi.vcxproj">
+      <Project>{ea4ebe01-05b2-491e-a61b-4418414cbc8d}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
