@@ -19,13 +19,13 @@ namespace Game
 
 		if (mGlfwWindow == nullptr)
 		{
-			GAME_LOG("ERROR: WIndow creation failed!");
+			GAME_LOG("ERROR: Window creation failed!");
 			return false;
 		}
 
 
 		glfwMakeContextCurrent(mGlfwWindow);//open gl considers this to be its drawing place
-		//glfwSwapInterval(1);
+		glfwSwapInterval(1);
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			GAME_LOG("ERROR: GLAD Failed to start!")

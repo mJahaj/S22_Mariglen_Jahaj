@@ -18,6 +18,11 @@ namespace Game
 		mInstance->mImplementation->Draw(picture, xPos, yPos, zPos, mInstance->mShader);
 	}
 
+	void Renderer::ClearScreen()
+	{
+		mInstance->mImplementation->ClearScreen();
+	}
+
 	Renderer::Renderer(): //colon symbol constructs mSHader right away
 		mShader("../Game/Assets/Shaders/defaultVertex.glsl", "../Game/Assets/Shaders/defaultFragment.glsl")
 	{

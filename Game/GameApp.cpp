@@ -2,7 +2,7 @@
 
 #include "GameApp.h"
 #include "GameWindow.h"
-#include "glad/glad.h"
+//#include "glad/glad.h"
 
 #include "Sprite.h"
 #include "Shader.h"
@@ -31,6 +31,10 @@ namespace Game
 
 		Game::Sprite star{ "../Game/Assets/Images/Star.png" };
 
+		int xPos{ star.GetWidth() };
+
+		mNextFrameTime = std::chrono::steady_clock::now() + mFrameDuration;
+
 		while (true)//game loop, frame rendering 
 		{
 			//collect user input
@@ -38,15 +42,17 @@ namespace Game
 			//generate next frame
 			OnUpdate();
 
-			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			Renderer::ClearScreen();
 
-			Renderer::Draw(star, 50, 20, 1);
+			Renderer::Draw(star, xPos, 20, 1);
 
-			
+			xPos = (xPos + 1);
+			std::this_thread::sleep_until(mNextFrameTime);
 
-			Game::GameWindow::GetWindow()->SwapBuffers();
+			Game::GameWindow::GetWindow()->SwapBuffers();//does drawing
 			Game::GameWindow::GetWindow()->CollectEvents();
+
+			mNextFrameTime += mFrameDuration;
 		}
 	}
 	void GameApp::OnUpdate()
