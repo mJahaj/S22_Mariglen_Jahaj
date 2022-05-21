@@ -155,10 +155,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Events.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameUtil.h" />
     <ClInclude Include="GameWindow.h" />
+    <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RendererImplementation.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="WindowImplementation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Events.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="pch.cpp">

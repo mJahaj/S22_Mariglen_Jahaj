@@ -21,7 +21,7 @@ namespace Game
 
 	bool GameWindow::CreateWindow(int width, int height, const std::string& windowName)
 	{
-		return mWindow->CreateWindow(800, 600, "Spring 22 Game");
+		return mWindow->CreateWindow(width, height, "Spring 22 Game");
 	}
 
 	void GameWindow::SwapBuffers()
@@ -42,6 +42,16 @@ namespace Game
 	int GameWindow::GetHeight() const
 	{
 		return mWindow->GetHeight();
+	}
+
+	void GameWindow::SetKeyPressedCallback(const std::function<void(const KeyPressedEvent&)>& keyPressedCallback)
+	{
+		mWindow->SetKeyPressedCallback(keyPressedCallback);
+	}
+
+	void GameWindow::SetKeyReleasedCallback(const std::function<void(const KeyReleasedEvent&)>& keyReleasedCallback)
+	{
+		mWindow->SetKeyReleasedCallback(keyReleasedCallback);
 	}
 
 	GameWindow::GameWindow()

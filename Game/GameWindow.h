@@ -2,6 +2,7 @@
 
 #include "WindowImplementation.h"
 #include "GameUtil.h"
+#include "Events.h"
 
 namespace Game {
 
@@ -22,6 +23,8 @@ namespace Game {
 		int GetWidth() const;
 		int GetHeight() const;
 
+		void SetKeyPressedCallback(const std::function<void(const KeyPressedEvent&)>& keyPressedCallback);
+		void SetKeyReleasedCallback(const std::function<void(const KeyReleasedEvent&)>& keyReleasedCallback);
 
 
 	private:

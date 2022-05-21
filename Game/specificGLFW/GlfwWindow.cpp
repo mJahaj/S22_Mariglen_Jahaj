@@ -30,6 +30,26 @@ namespace Game
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			GAME_LOG("ERROR: GLAD Failed to start!")
 
+			glfwSetWindowUserPointer(mGlfwWindow, &mCallbacks);
+
+		//lambda function
+		glfwSetKeyCallback(mGlfwWindow, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+			{
+				if (action == GLFW_PRESS || action == GLFW_REPEAT)
+				{
+					Callbacks* userPointer{ (Callbacks*)glfwGetWindowUserPointer(window) };
+					KeyPressedEvent event{ key };
+					userPointer->keyPressedCallback(event);
+				}
+				else if (action == GLFW_RELEASE)
+				{
+					Callbacks* userPointer{ (Callbacks*)glfwGetWindowUserPointer(window) };
+					KeyReleasedEvent event{ key };
+					userPointer->keyReleasedCallback(event);
+				}
+			}
+		);
+
 		return true;
 	}
 
@@ -64,5 +84,14 @@ namespace Game
 		if (mGlfwWindow != nullptr)
 			glfwDestroyWindow(mGlfwWindow);
 		glfwTerminate();
+	}
+
+	void GlfwWindow::SetKeyPressedCallback( std::function<void(const KeyPressedEvent&)> keyPressedCallback)
+	{			
+		mCallbacks.keyPressedCallback = keyPressedCallback;
+	}
+	void GlfwWindow::SetKeyReleasedCallback(std::function<void(const KeyReleasedEvent&)> keyReleasedCallback)
+	{
+		mCallbacks.keyReleasedCallback = keyReleasedCallback;
 	}
 }

@@ -7,46 +7,44 @@
 #include "Sprite.h"
 #include "Shader.h"
 #include "Renderer.h"
+#include "Events.h"
+#include "KeyCodes.h"
+//#include "GLFW/glfw3.h"
 
 
 namespace Game
 {
-	void GameApp::Run()		
+
+	GameApp::GameApp()
 	{
 		GAME_LOG("Running ..");
 		//Enables glfw
 		Game::GameWindow::Init();//no obj needed it just starts
 
-		//GLFWwindow* window;
-
-		Game::GameWindow::GetWindow()->CreateWindow(800, 600, "My Game Window");//anyone can access window params 
-		
-		// Shaders //
-		//Game::Shader shader{ "../Game/Assets/Shaders/defaultVertex.glsl", "../Game/Assets/Shaders/defaultFragment.glsl" };
-		//shader.SetUniform2Ints("windowSize", 800, 600);
-		//shader.SetUniform3Ints("spriteCoord", 100, 200, 1.0);//sprite coords 100, 200
-		//Game::Sprite star{ "../Game/Assets/Images/Star.png" };
+		Game::GameWindow::GetWindow()->CreateWindow(1000, 800, "My Game Window");//anyone can access window params 
 
 		Renderer::Init();
+	}
+	void GameApp::Run()		
+	{
 
-		Game::Sprite star{ "../Game/Assets/Images/Star.png" };
 
-		int xPos{ star.GetWidth() };
 
 		mNextFrameTime = std::chrono::steady_clock::now() + mFrameDuration;
 
+
 		while (true)//game loop, frame rendering 
 		{
+			Renderer::ClearScreen();
 			//collect user input
 			//update game world based on user input
 			//generate next frame
 			OnUpdate();
 
-			Renderer::ClearScreen();
+			
 
-			Renderer::Draw(star, xPos, 20, 1);
 
-			xPos = (xPos + 1);
+			//xPos = (xPos + 5);
 			std::this_thread::sleep_until(mNextFrameTime);
 
 			Game::GameWindow::GetWindow()->SwapBuffers();//does drawing
@@ -58,5 +56,13 @@ namespace Game
 	void GameApp::OnUpdate()
 	{
 
+	}
+	void GameApp::SetKeyPressedCallback( std::function<void(const KeyPressedEvent&)>  keyPressedCallback)
+	{
+		GameWindow::GetWindow()->SetKeyPressedCallback(keyPressedCallback);
+	}
+	void GameApp::SetKeyReleasedCallback(std::function<void(const KeyReleasedEvent&)> keyReleasedCallback)
+	{
+		GameWindow::GetWindow()->SetKeyReleasedCallback(keyReleasedCallback);
 	}
 }

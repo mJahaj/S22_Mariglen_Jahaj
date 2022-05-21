@@ -143,12 +143,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SpringApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game\Game.vcxproj">
       <Project>{bfff7b9f-89f0-4827-86ba-218ef7fad15a}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="SpringApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
