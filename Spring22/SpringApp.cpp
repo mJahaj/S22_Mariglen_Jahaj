@@ -6,11 +6,11 @@ SpringApp::SpringApp()
 		switch (e.GetKeyCode())
 		{
 		case GAME_KEY_LEFT:
-			mHorizontalSpeed = -5;
+			mHorizontalSpeed = mHeroSpeed * -1;
 			mHero.SetActiveImage(1);//left image
 			break;
 		case GAME_KEY_RIGHT:
-			mHorizontalSpeed = 5;
+			mHorizontalSpeed = mHeroSpeed;
 			mHero.SetActiveImage(0);// right image
 			break;
 		}
@@ -20,28 +20,46 @@ SpringApp::SpringApp()
 		mHorizontalSpeed = 0;
 		});
 
-	mDangers[0].SetX(400);
-	mDangers[0].SetY(400);
+	srand(time(0));
+	
+	newXPos = (rand() % 800);
+		
+	
+	mFruits[0].SetX(newXPos);
+	mFruits[0].SetY(600);
 }
 
 void SpringApp::OnUpdate()
 {
 	mHero.SetX(mHero.GetX() + mHorizontalSpeed);
 
-	if (mDangers[0].GetY() < 0)
+	if (mFruits[0].GetY() < 0)
 		mEnemyVSpeed *= -1;
-	else if (mDangers[0].GetY() > Game::GameWindow::GetWindow()->GetHeight() - mDangers[0].GetHeight())
+	else if (mFruits[0].GetY() > Game::GameWindow::GetWindow()->GetHeight() - mFruits[0].GetHeight())
 		mEnemyVSpeed *= -1;
 
-	mDangers[0].SetY(mDangers[0].GetY() + mEnemyVSpeed);
-
-	if (Collide(mHero, mDangers[0]))
+	mFruits[0].SetY(mFruits[0].GetY() + mEnemyVSpeed);
+	if (Collide(mHero, mFruits[0]))
 	{
-		exit(0);
+		
+		newXPos = (rand() % 800);
+		mFruits[0].SetX(newXPos);
+		mFruits[0].SetY(600);
+		activeFruit = (rand() % 5);
+		mFruits[0].SetActiveImage(activeFruit);
+		mHeroSpeed++;
+		mEnemyVSpeed -= .25;
+		score++;
 	}
 
+	if (mFruits[0].GetY() <= 0)// If enemy hits floor game over
+	{
+		std::cout << "Score: " << score <<std::endl;
+		exit(0);
+	}	
+
 	mHero.Draw();
-	mDangers[0].Draw();
+	mFruits[0].Draw();
 }
 
 bool SpringApp::Collide(const Entity& one, const Entity& another)

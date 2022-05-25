@@ -1,0 +1,18 @@
+The hero in this game is a hungry frog. The frogs task is to eat as much fruit as possible before they hit the ground.
+The fruits spawn in different positions after they are consumed.
+The fruits fall speed increases as the game porgresses and also the frogs speed increases to accomodate the fruit speed.
+
+Added Randomness to fruit game start position.
+
+Added randomness to fruit respawn when they are consumed/collided with hero.
+
+Added Hero Speed increases as game progresses.
+
+Added fruit Speed increase as game progresses.
+
+Added multiple fruit aka(danger) textures, after a fruit is consumed a new random fruit spawns (apple, banana, cherry...)
+
+Added score, plus one point for each fruit consumed.
+
+The Game ends when a fruit is missed/hits the floor and the score is displayed on terminal.
+
